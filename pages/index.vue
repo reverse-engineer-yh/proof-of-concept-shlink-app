@@ -3,6 +3,7 @@ const enterstuff = ref();
 const enterslug = ref();
 const getres = ref("");
 const formatres = ref();
+const httpsorhttp = ref();
 const format = async () => {
     console.log(enterstuff.value);
     try {
@@ -13,7 +14,7 @@ const format = async () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                url: enterstuff.value,
+                url: httpsorhttp.value + enterstuff.value,
                 token: "5432",
             }),
         });
@@ -44,6 +45,10 @@ const sendslug = async () => {
 <template>
     <div>
         <h1>Proof of Concept</h1>
+        <select v-model="httpsorhttp">
+            <option value="http://">http://</option>
+            <option value="https://">https://</option>
+        </select>
         <input v-model="enterstuff" placeholder="whatever" />
         <br />
         <button @click="format">button</button>
