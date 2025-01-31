@@ -1,11 +1,9 @@
 import * as shlink from "@shlinkio/shlink-js-sdk";
 import { NodeHttpClient } from "@shlinkio/shlink-js-sdk/node";
-
 const serverInfo = {
   baseUrl: "https://go.yuanhau.com",
   apiKey: process.env.shlink_api,
 };
-
 export const apiClient = new shlink.ShlinkApiClient(
   new NodeHttpClient(),
   serverInfo,
