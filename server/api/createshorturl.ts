@@ -12,15 +12,16 @@ export const apiClient = new shlink.ShlinkApiClient(
 );
 export default defineEventHandler(async (event) => {
   try {
-    setResponseHeader(event, 'Content-Type', 'application/json');
+    setResponseHeader(event, "Content-Type", "application/json");
     const body = await readBody(event);
     console.log(body.url);
     if (event.node.req.method === "POST") {
-      await apiClient.createShortUrl({
+      const req = await apiClient.createShortUrl({
         longUrl: `${body.url}`,
       });
       return {
         status: "ok",
+        code: req.shortCode,
       };
     } else {
       return {

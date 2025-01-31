@@ -2,6 +2,7 @@
 const enterstuff = ref();
 const enterslug = ref();
 const getres = ref("");
+const formatres = ref();
 const format = async () => {
     console.log(enterstuff.value);
     try {
@@ -17,6 +18,7 @@ const format = async () => {
             }),
         });
         const res = await req.json();
+        formatres.value = "https://go.yuanhau.com/" + res.code;
     } catch (e) {
         console.log(e);
     }
@@ -41,10 +43,11 @@ const sendslug = async () => {
 </script>
 <template>
     <div>
-        <h1>POC</h1>
+        <h1>Proof of Concept</h1>
         <input v-model="enterstuff" placeholder="whatever" />
         <br />
         <button @click="format">button</button>
+        <p>{{ formatres }}</p>
         <hr />
         <input v-model="enterslug" placeholder="cool" />
         <button @click="sendslug">Send</button>
