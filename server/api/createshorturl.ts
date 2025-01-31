@@ -16,13 +16,11 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     console.log(body.url);
     if (event.node.req.method === "POST") {
-      const createapi = await apiClient.createShortUrl({
+      await apiClient.createShortUrl({
         longUrl: `${body.url}`,
       });
-      console.log(createapi);
       return {
         status: "ok",
-        createapistatus: createapi,
       };
     } else {
       return {

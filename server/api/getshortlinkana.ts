@@ -14,10 +14,10 @@ export default defineEventHandler(async (event) => {
   try {
     setResponseHeader(event, 'Content-Type', 'application/json');
     const body = await readBody(event);
-    console.log(body.url);
+    console.log(body.slug);
     if (event.node.req.method === "GET") {
       const createapi = await apiClient.createShortUrl({
-        longUrl: `${body.url}`,
+        longUrl: `${body.slug}`,
       });
       console.log(createapi);
       return {

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const enterstuff = ref();
+const enterslug = ref();
+const getres = ref("");
 const format = async () => {
     console.log(enterstuff.value);
     try {
@@ -19,22 +21,21 @@ const format = async () => {
         console.log(e);
     }
 };
-const obtaindata = async () => {
+const sendslug = async () => {
     try {
         const req = await fetch("/api/getshortlinkana", {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                token: "5432",
+                slug: enterslug.value,
             }),
         });
         const res = await req.json();
-        return res;
+        console.log(res);
     } catch (e) {
         console.log(e);
-        return;
     }
 };
 </script>
@@ -44,6 +45,9 @@ const obtaindata = async () => {
         <input v-model="enterstuff" placeholder="whatever" />
         <br />
         <button @click="format">button</button>
-        <
+        <hr />
+        <input v-model="enterslug" placeholder="cool" />
+        <button @click="sendslug">Send</button>
+        <h4>{{ getres }}</h4>
     </div>
 </template>
