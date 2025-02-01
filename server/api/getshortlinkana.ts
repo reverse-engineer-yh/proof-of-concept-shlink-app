@@ -12,13 +12,13 @@ export const apiClient = new shlink.ShlinkApiClient(
 );
 export default defineEventHandler(async (event) => {
   try {
-    setResponseHeader(event, 'Content-Type', 'application/json');
+    setResponseHeader(event, "Content-Type", "application/json");
     const body = await readBody(event);
-    console.log(body.slug);
-    if (event.node.req.method === "GET") {
-      const createapi = await apiClient.createShortUrl({
-        longUrl: `${body.slug}`,
-      });
+    const string = String(body.slug);
+    console.log(string);
+    if (event.node.req.method === "POST") {
+              // make it a string(?
+      const createapi = await apiClient.getShortUrlVisits(string);
       console.log(createapi);
       return {
         status: "ok",
@@ -33,6 +33,7 @@ export default defineEventHandler(async (event) => {
     console.log(e);
     return {
       status: "not ok",
+      error: e,
     };
   }
 });
